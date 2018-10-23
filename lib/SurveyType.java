@@ -1,4 +1,5 @@
 enum SurveyType {
     RATING,
-    SINGLE_SELECT
+    SINGLE_SELECT,
+    UNDEFINED
 }

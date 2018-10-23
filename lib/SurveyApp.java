@@ -5,16 +5,17 @@ import java.util.ArrayList;
  */
 public class SurveyApp {
 
-    static final int NUMBER_FILES = 2;
+    private static final int NUMBER_FILES = 2;
 	
 	public static void main(String[] args) {
 	    if (!validInput(args)) {
+	        System.out.println("Two file space separated file names required.");
 	        return;
         }
 
 		// Load data into array of objects
-		ArrayList<SurveyQuestion> surveyQuestions = Loader.loadSurvey(args[0]);
-		ArrayList<Response> surveyResponses = Loader.loadResponses(args[1]);
+		ArrayList<Question> surveyQuestions = Loader.loadQuestions(args[0]);
+		ArrayList<Response> surveyResponses = Loader.loadResponses(args[1], surveyQuestions);
 
 		// Perform operation on this data
         ParticipationResult participationResult = calculateParticipation();
