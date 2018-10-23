@@ -27,19 +27,24 @@ class LoaderTest {
 
         // testing (could use a for loop)
         assertEquals(numberQuestions, actualQuestions.size());
-        assertEquals(expectedQuestions[0].getType(), actualQuestions.get(0).getType());
-        assertEquals(expectedQuestions[1].getType(), actualQuestions.get(1).getType());
-        assertEquals(expectedQuestions[2].getType(), actualQuestions.get(2).getType());
-        assertEquals(expectedQuestions[3].getType(), actualQuestions.get(3).getType());
-        assertEquals(expectedQuestions[4].getType(), actualQuestions.get(4).getType());
+        assertEquals(expectedQuestions[0].getType(),
+                actualQuestions.get(0).getType());
+        assertEquals(expectedQuestions[1].getType(),
+                actualQuestions.get(1).getType());
+        assertEquals(expectedQuestions[2].getType(),
+                actualQuestions.get(2).getType());
+        assertEquals(expectedQuestions[3].getType(),
+                actualQuestions.get(3).getType());
+        assertEquals(expectedQuestions[4].getType(),
+                actualQuestions.get(4).getType());
     }
 
     @Test
     void loadResponsesTest() {
 
         // inputs
-        String fileName = "example-data/survey-2-responses.csv";
         String questionFileName = "example-data/survey-2.csv";
+        String responsesFileName = "example-data/survey-2-responses.csv";
         ArrayList<Question> questions = Loader.loadQuestions(questionFileName);
 
         // expected output - for the first two responses only
@@ -60,7 +65,8 @@ class LoaderTest {
         int numberOfResponses = 5;
 
         // output
-        ArrayList<Response> actualResponses = Loader.loadResponses(fileName, questions);
+        ArrayList<Response> actualResponses = Loader.loadResponses(
+                responsesFileName, questions);
 
         // testing
         assertEquals(numberOfResponses, actualResponses.size());
@@ -79,7 +85,8 @@ class LoaderTest {
     void parseCSVResponseLineTest() {
 
         // inputs
-        String[] values = {"employee1@abc.xyz", "1", "2014-07-28T20:35:41+00:00", "5", "4", "questionString"};
+        String[] values = {"employee1@abc.xyz", "1",
+                "2014-07-28T20:35:41+00:00", "5", "4", "questionString"};
         ArrayList<Question> questions = new ArrayList<>();
         questions.add(new Question(Question.RATING_QUESTION));
         questions.add(new Question(Question.RATING_QUESTION));
@@ -95,6 +102,7 @@ class LoaderTest {
         ArrayList<String> singleResponses = response.getSingleSelects();
 
         // testing
+        assertTrue(response.getIsSubmitted());
         assertEquals(numberOfRatings, ratingResponses.size());
         assertEquals(numberOfSingleSelects, singleResponses.size());
         assertEquals(5, (int) ratingResponses.get(0));
@@ -103,12 +111,13 @@ class LoaderTest {
     }
 
     /**
-     * Case with no submission date, should return a null response
+     * Case with no submission date, should be tagged as unsubmitted
      */
     @Test
     void parseCSVResponseLineTestNoDate() {
         // inputs
-        String[] values = {"employee1@abc.xyz", "1", "", "5", "4", "questionString"};
+        String[] values = {"employee1@abc.xyz", "1", "", "5", "4",
+                "questionString"};
         ArrayList<Question> questions = new ArrayList<>();
         questions.add(new Question(Question.RATING_QUESTION));
         questions.add(new Question(Question.RATING_QUESTION));
@@ -118,11 +127,11 @@ class LoaderTest {
         Response response = Loader.parseCSVResponseLine(values, questions);
 
         // testing
-        assertNull(response);
+        assertFalse(response.getIsSubmitted());
     }
 
     /**
-     * Alternate case with no date, should return a null response
+     * Alternate case with no date, should be tagged as unsubmitted
      */
     @Test
     void parseCSVResponseLineTestNoDate2() {
@@ -136,6 +145,30 @@ class LoaderTest {
         Response response = Loader.parseCSVResponseLine(values, questions);
 
         // testing
-        assertNull(response);
+        assertFalse(response.getIsSubmitted());
+    }
+
+    @Test
+    void parseCSVResponseLineTestFile() {
+
+        // input - testing only a few responses
+        String questionFileName = "example-data/survey-test-0.csv";
+        String responsesFileName = "example-data/survey-test-0-responses.csv";
+        ArrayList<Question> questions = Loader.loadQuestions(questionFileName);
+
+        // expected
+        int[] ratings0 = {1,5,5,2,4,5,5,5,4,4,1};
+        int numberOfRatings = 11;
+
+        // actual
+        ArrayList<Response> responses = Loader.loadResponses(responsesFileName,
+                questions);
+
+        // testing
+        ArrayList<Integer> ratings = responses.get(0).getRatings();
+        assertEquals(numberOfRatings, ratings.size());
+        for (int i = 0; i < numberOfRatings; i++) {
+            assertEquals(ratings0[i], (int)ratings.get(i));
+        }
     }
 }

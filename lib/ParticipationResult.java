@@ -1,9 +1,13 @@
+/**
+ * Stores two survey participation metrics.
+ */
 public class ParticipationResult {
 
     private double participationPercentage;
     private int participationCount;
 
-    public ParticipationResult(double participationPercentage, int participationCount) {
+    public ParticipationResult(double participationPercentage,
+                               int participationCount) {
         this.participationPercentage = participationPercentage;
         this.participationCount = participationCount;
     }

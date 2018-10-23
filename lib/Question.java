@@ -1,5 +1,5 @@
 /**
- * POJO for Survey's
+ * POJO for Survey's. Stores survey questions.
  */
 public class Question {
 
@@ -7,7 +7,7 @@ public class Question {
     static final String SINGLE_QUESTION = "singleselect";
 
     // Could also store theme, text
-    private SurveyType type;
+    private QuestionType type;
 
     public Question(String surveyType) {
         setSurveyType(surveyType);
@@ -15,15 +15,15 @@ public class Question {
 
     private void setSurveyType(String typeString) {
         if (typeString.equals(RATING_QUESTION)) {
-            this.type = SurveyType.RATING;
+            this.type = QuestionType.RATING;
         } else if (typeString.equals(SINGLE_QUESTION)) {
-            this.type = SurveyType.SINGLE_SELECT;
+            this.type = QuestionType.SINGLE_SELECT;
         } else {
-            this.type = SurveyType.UNDEFINED;
+            this.type = QuestionType.UNDEFINED;
         }
     }
 
-    public SurveyType getType() {
+    public QuestionType getType() {
         return type;
     }
 }
