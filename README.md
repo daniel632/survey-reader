@@ -1,4 +1,13 @@
-# Culture Amp's Developer Coding Test
+# Survey Reader Application
+
+## Some Design Decision Notes
+
+I decided to make a relatively sophisticated system. Furthermore, it does not have minimal runtime complexity (this could be achieved by calculating averages and other metrics during the first iteration), nor does it have the smallest space complexity. This was done for several reasons.
+
+Firstly, this allows the program to be more easily extended. If it is decided that a new task is to be carried out on survey data, then this will mostly involve writting a single new method in SurveyApp. Secondly, it acts to increase modularity. Instead of having a single iteration where everything is read-in and calculations are made simultaneously, data is stored appropriately and more narrowly defined methods are later called. This also increases the testability of the program.
+
+
+## Instructions
 
 Your task is to build a CLI application to parse and display survey data from CSV files, and display the results.
 
