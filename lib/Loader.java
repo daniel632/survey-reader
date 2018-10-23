@@ -67,9 +67,11 @@ public class Loader {
 
                 // If the response is valid, add it
                 response = parseCSVResponseLine(values, questions);
-                if (response != null) {
-                    responses.add(response);
-                }
+//                if (response != null) {
+//                    responses.add(response);
+//                }
+                // Note a null reponse indicates a survey with no submission date
+                responses.add(response);
             }
 
         } catch (IOException e) {

@@ -64,14 +64,14 @@ class LoaderTest {
 
         // testing
         assertEquals(numberOfResponses, actualResponses.size());
-        assertEquals((int)response0.getRatingResponses().get(0),
-                    (int)actualResponses.get(0).getRatingResponses().get(0),
+        assertEquals((int)response0.getRatings().get(0),
+                    (int)actualResponses.get(0).getRatings().get(0),
                     "First reponse's first rating equals 5");
-        assertEquals((int)response1.getRatingResponses().get(3),
-                    (int)actualResponses.get(1).getRatingResponses().get(3),
+        assertEquals((int)response1.getRatings().get(3),
+                    (int)actualResponses.get(1).getRatings().get(3),
                     "Second response's fourth rating equals 3");
-        assertEquals(response1.getSingleSelectResponses().get(0),
-                    actualResponses.get(1).getSingleSelectResponses().get(0),
+        assertEquals(response1.getSingleSelects().get(0),
+                    actualResponses.get(1).getSingleSelects().get(0),
                     "Second response's first single select equals 'Jane'");
     }
 
@@ -91,8 +91,8 @@ class LoaderTest {
 
         // output
         Response response = Loader.parseCSVResponseLine(values, questions);
-        ArrayList<Integer> ratingResponses = response.getRatingResponses();
-        ArrayList<String> singleResponses = response.getSingleSelectResponses();
+        ArrayList<Integer> ratingResponses = response.getRatings();
+        ArrayList<String> singleResponses = response.getSingleSelects();
 
         // testing
         assertEquals(numberOfRatings, ratingResponses.size());

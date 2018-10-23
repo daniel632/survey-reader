@@ -1,15 +1,14 @@
 public class ParticipationResult {
 
-    // TODO - privacy
-    private float participationPercentage;
+    private double participationPercentage;
     private int participationCount;
 
-    public ParticipationResult(float participationPercentage, int participationCount) {
+    public ParticipationResult(double participationPercentage, int participationCount) {
         this.participationPercentage = participationPercentage;
         this.participationCount = participationCount;
     }
 
-    public float getParticipationPercentage() {
+    public double getParticipationPercentage() {
         return participationPercentage;
     }
 

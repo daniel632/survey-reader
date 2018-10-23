@@ -26,9 +26,9 @@ class ResponseTest {
         response.addRating(ratingString1);
 
         // testing
-        assertEquals(rating0, (int) response.getRatingResponses().get(0));
-        assertEquals(rating1, (int) response.getRatingResponses().get(1));
-        assertEquals(numberOfRatings, response.getRatingResponses().size());
-        assertEquals(numberOfSelects, response.getSingleSelectResponses().size());
+        assertEquals(rating0, (int) response.getRatings().get(0));
+        assertEquals(rating1, (int) response.getRatings().get(1));
+        assertEquals(numberOfRatings, response.getRatings().size());
+        assertEquals(numberOfSelects, response.getSingleSelects().size());
     }
 }
